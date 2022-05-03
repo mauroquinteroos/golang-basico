@@ -1,28 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"strconv"
+)
 
 func main() {
-	// ciclo for
-	for i := 0; i < 10; i++ {
-		fmt.Println("ciclo for: ", i)
+	valor1 := 1
+	valor2 := 2
+
+	if valor1 == valor2 {
+		fmt.Println("Son iguales")
+	} else {
+		fmt.Println("No son iguales")
 	}
 
-	fmt.Printf("\n")
-
-	// ciclo while
-	i := 0
-	for i < 10 {
-		fmt.Println("ciclo while: ", i)
-		i++
+	// With AND
+	if valor1 == 1 && valor2 == 2 {
+		fmt.Println("Es verdad")
 	}
 
-	fmt.Printf("\n")
-
-	// for forever
-	counterForever := 0
-	for {
-		fmt.Println("ciclo for forever: ", counterForever)
-		counterForever++
+	// With OR
+	if valor1 == 0 || valor2 == 2 {
+		fmt.Println("Es verdad")
 	}
+
+	// Convertir texto a número
+	value, err := strconv.Atoi("10")
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Println(value)
+	}
+
+	fmt.Println(10 % 2)
 }
