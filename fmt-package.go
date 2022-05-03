@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func fmtPackage() {
 	wordMessage := "Hello World"
 
 	// Println
