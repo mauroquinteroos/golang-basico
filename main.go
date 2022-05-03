@@ -1,38 +1,39 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"strconv"
-)
+import "fmt"
 
 func main() {
-	valor1 := 1
-	valor2 := 2
+	modulo2 := 10 % 2
 
-	if valor1 == valor2 {
-		fmt.Println("Son iguales")
-	} else {
-		fmt.Println("No son iguales")
+	// 1° forma (con condición determinada)
+	switch modulo2 {
+	case 0:
+		fmt.Println("El número es par")
+	case 1:
+		fmt.Println("El número es impar")
+	default:
+		fmt.Println("No se puede calcular")
 	}
 
-	// With AND
-	if valor1 == 1 && valor2 == 2 {
-		fmt.Println("Es verdad")
+	// 2° forma (con condición determinada)
+	switch modulo1 := 10 % 2; modulo1 {
+	case 0:
+		fmt.Println("El número es par")
+	case 1:
+		fmt.Println("El número es impar")
+	default:
+		fmt.Println("No se puede calcular")
 	}
 
-	// With OR
-	if valor1 == 0 || valor2 == 2 {
-		fmt.Println("Es verdad")
+	// 3° forma (sin condición determinada)
+	value := 80
+	switch {
+	case value > 100:
+		fmt.Println("El valor es mayor a 100")
+	case value < 0:
+		fmt.Println("El valor es menor a 0")
+	default:
+		fmt.Println("El valor no cumple ninguna condicion")
 	}
 
-	// Convertir texto a número
-	value, err := strconv.Atoi("10")
-	if err != nil {
-		log.Fatal(err)
-	} else {
-		fmt.Println(value)
-	}
-
-	fmt.Println(10 % 2)
 }
