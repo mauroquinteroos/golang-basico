@@ -1,40 +1,22 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
-
-func isPalindrome(text string) {
-	text = strings.ToLower(text)
-	var textReverse string = ""
-
-	for i := len(text) - 1; i >= 0; i-- {
-		textReverse += string(text[i])
-	}
-
-	fmt.Println(textReverse)
-	if text == textReverse {
-		fmt.Println("Es palindrome")
-	} else {
-		fmt.Println("No es palindrome")
-	}
-}
+import "fmt"
 
 func main() {
-	slice := []string{"Hola", "que", "hace"}
+	// en el corchete se pone el tipo de dato de la llave y se le indica el tipo de dato que tendrá cada uno de sus valores
+	newMap := make(map[string]int)
+	newMap["Mauro"] = 23
+	newMap["Lucy"] = 25
+	newMap["Daniel"] = 25
 
-	for i, valor := range slice {
-		fmt.Println(i, valor)
+	for key, value := range newMap {
+		fmt.Println(key, value)
 	}
 
-	for _, valor := range slice {
-		fmt.Println(valor)
-	}
+	fmt.Println(newMap)
 
-	for i := range slice {
-		fmt.Println(i)
-	}
-
-	isPalindrome("Ama")
+	// isOk sirve para saber si el key existe o no en el mapa
+	// devolviendo true si existe o false si no existe
+	value, isOk := newMap["Mauro"]
+	fmt.Println(value, isOk)
 }
