@@ -1,22 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	// "golang_basico/mypackage"
+	pk "golang_basico/mypackage"
+)
+
+// type sirve para indicar tipo de dato
+type car struct {
+	brand string
+	year  int
+}
 
 func main() {
-	// en el corchete se pone el tipo de dato de la llave y se le indica el tipo de dato que tendrá cada uno de sus valores
-	newMap := make(map[string]int)
-	newMap["Mauro"] = 23
-	newMap["Lucy"] = 25
-	newMap["Daniel"] = 25
+	// Instanciar una estructura vacía
+	var myCar1 car
+	myCar1.brand = "Ford"
+	fmt.Println(myCar1)
 
-	for key, value := range newMap {
-		fmt.Println(key, value)
-	}
+	// Instanciar una estructura de manera corta
+	myCar2 := car{brand: "Tesla", year: 2021}
+	fmt.Println(myCar2)
 
-	fmt.Println(newMap)
+	// var myCar3 = mypackage.CarPublic{Brand: "Ferrari", Year: 2021}
+	var myCar3 = pk.CarPublic{Brand: "Ferrari", Year: 2021}
+	fmt.Println(myCar3)
 
-	// isOk sirve para saber si el key existe o no en el mapa
-	// devolviendo true si existe o false si no existe
-	value, isOk := newMap["Mauro"]
-	fmt.Println(value, isOk)
+	// var myCar4 = pk.carPrivate{Brand: "Ferrari", Year: 2021} // (al ser privado no se puede acceder)
+	pk.PrintMessage()
 }
