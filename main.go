@@ -23,6 +23,11 @@ func (myPc *pc) duplicateRam() {
 	fmt.Println("local object: ", myPc)
 }
 
+// Stringers (Personalizar el output de un Struct)
+func (myPc pc) String() string {
+	return fmt.Sprintf("Tengo %d GB RAM, %d GB Disco y es una %s", myPc.ram, myPc.disk, myPc.brand)
+}
+
 func main() {
 	a := 50
 	// b será el puntera de a (la dirección del espacio en memoria donde se guarda a)
@@ -55,4 +60,7 @@ func main() {
 	fmt.Println("person1: ", person1.Print())
 	person1.AddAge()
 	fmt.Println("person1: ", person1.Print())
+
+	fmt.Println("--------------------------")
+
 }
