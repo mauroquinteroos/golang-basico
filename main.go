@@ -19,10 +19,23 @@ func (r rectangulo) area() float64 {
 	return r.base * r.altura
 }
 
+type Figura interface {
+	area() float64
+}
+
+func calcular(figura Figura) {
+	fmt.Println("Area: ", figura.area())
+}
+
 func main() {
 	cuadrado1 := cuadrado{base: 5}
-	fmt.Println("Area: ", cuadrado1.area())
-
 	rectangulo1 := rectangulo{base: 5, altura: 10}
-	fmt.Println("Area: ", rectangulo1.area())
+
+	calcular(cuadrado1)
+	calcular(rectangulo1)
+
+	fmt.Println("--------------------------------")
+
+	myInterface := []interface{}{"Hola", 12, true, 5.9}
+	fmt.Println(myInterface...)
 }
