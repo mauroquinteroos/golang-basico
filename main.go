@@ -1,41 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-type cuadrado struct {
-	base float64
-}
-
-func (c cuadrado) area() float64 {
-	return c.base * c.base
-}
-
-type rectangulo struct {
-	base   float64
-	altura float64
-}
-
-func (r rectangulo) area() float64 {
-	return r.base * r.altura
-}
-
-type Figura interface {
-	area() float64
-}
-
-func calcular(figura Figura) {
-	fmt.Println("Area: ", figura.area())
+func say(text string, wg *sync.WaitGroup) {
+	defer wg.Done() // sirve para liberar la goroutine del waitgroup
+	fmt.Println(text)
 }
 
 func main() {
-	cuadrado1 := cuadrado{base: 5}
-	rectangulo1 := rectangulo{base: 5, altura: 10}
+	var wg sync.WaitGroup
 
-	calcular(cuadrado1)
-	calcular(rectangulo1)
+	fmt.Println("Hello")
 
-	fmt.Println("--------------------------------")
+	wg.Add(1) // Agrega una goroutine al WaitGroup para que espere la ejecución antes de que la goroutine main termine
+	go say("World", &wg)
 
-	myInterface := []interface{}{"Hola", 12, true, 5.9}
-	fmt.Println(myInterface...)
+	wg.Add(1)
+	// Función anónima
+	go func(text string, wg *sync.WaitGroup) {
+		defer wg.Done()
+		fmt.Println(text)
+	}("Bye!", &wg)
+
+	wg.Wait() // Sirve para decirle a la goroutine principal que espere a las demás goroutines
 }
