@@ -2,28 +2,18 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
-func say(text string, wg *sync.WaitGroup) {
-	defer wg.Done() // sirve para liberar la goroutine del waitgroup
-	fmt.Println(text)
+func say(text string, c chan<- string) {
+	c <- text
 }
 
 func main() {
-	var wg sync.WaitGroup
+	c := make(chan string, 1)
 
 	fmt.Println("Hello")
 
-	wg.Add(1) // Agrega una goroutine al WaitGroup para que espere la ejecución antes de que la goroutine main termine
-	go say("World", &wg)
+	go say("World", c)
 
-	wg.Add(1)
-	// Función anónima
-	go func(text string, wg *sync.WaitGroup) {
-		defer wg.Done()
-		fmt.Println(text)
-	}("Bye!", &wg)
-
-	wg.Wait() // Sirve para decirle a la goroutine principal que espere a las demás goroutines
+	fmt.Println(<-c)
 }
