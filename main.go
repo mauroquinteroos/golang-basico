@@ -4,16 +4,30 @@ import (
 	"fmt"
 )
 
-func say(text string, c chan<- string) {
-	c <- text
-}
-
 func main() {
-	c := make(chan string, 1)
+	jobs := make(chan int, 5)
+	done := make(chan bool)
 
-	fmt.Println("Hello")
+	go func() {
+		for {
+			j, more := <-jobs
+			fmt.Println("job: ", j)
+			fmt.Println("is there more: ", more)
+			if more {
+				fmt.Println("received job", j)
+			} else {
+				fmt.Println("received all jobs")
+				done <- true
+				return
+			}
+		}
+	}()
 
-	go say("World", c)
-
-	fmt.Println(<-c)
+	for j := 1; j <= 5; j++ {
+		jobs <- j
+		fmt.Println("sent job", j)
+	}
+	close(jobs)
+	fmt.Println("sent all jobs")
+	<-done
 }
